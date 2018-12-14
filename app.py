@@ -9,7 +9,7 @@ def front_page():
 
 @app.route('/add_msg', methods=['POST'])
 def add_msg():
-    data = request.get_json(silent=True)
+    data = request.get_json()
     print("Post: " + str(data))
     return "typpi"
 

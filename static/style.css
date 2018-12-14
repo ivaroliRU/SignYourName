@@ -4,3 +4,10 @@
     margin: 0px;
     padding: 0px;
 }
+
+#msg-form{
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    display: none;
+}
