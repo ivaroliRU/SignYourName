@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from data_storage import get_data
+from data_storage import get_data, insert_data
 
 app = Flask(__name__)
 app.debug = True
@@ -13,8 +13,9 @@ def front_page():
 @app.route('/add_msg', methods=['POST'])
 def add_msg():
     data = request.get_json()
-    print("Post: " + str(data))
-    return "typpi"
+    insert_data(data, 'data.json')
+
+    return "success!"
 
 if __name__ == '__main__':
     app.run(port=3000)

@@ -4,10 +4,10 @@
 A website where the user can post on the site a short sentance and sign their name for all to see.
 ### Installation
 ### ToDo
-- [ ] Create a barebone server
-- [ ] Create a barebone website
-- [ ] Add communication between site and server
-- [ ] Store names in a makeshift database
-- [ ] Retrieve the names/text
-- [ ] Render the names/text
-- [ ] Add to the website
+- [X] Create a barebone server
+- [X] Create a barebone website
+- [X] Add communication between site and server
+- [X] Store names in a makeshift database
+- [X] Retrieve the names/text
+- [X] Render the names/text
+- [X] Add to the website
