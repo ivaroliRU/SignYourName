@@ -29,7 +29,7 @@
             <button class="btn cancel-btn" id="cancel-btn">Cancel</button>
         </div>
         {% for msg in content %}
-            <div style="position:absolute; left:{{msg['position']['x']}}px; top:{{msg['position']['y']}}px;"><div>{{msg['name']}}:</div><div>{{msg['msg']}}</div></div>
+            <div style="position:absolute; left:{{msg['position']['x']}}px; top:{{msg['position']['y']}}px;"><div><b>{{msg['name']}}:</b></div><div>{{msg['msg']}}</div></div>
         {% endfor %}
     </div>
 

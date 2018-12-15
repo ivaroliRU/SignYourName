@@ -22,6 +22,11 @@ $(window).scroll(function () {
     }
 });
 
+
+$('#cancel-btn').click(function () {
+    clear_form();
+});
+
 $('#submit-btn').click(function () {
     var _name = $("#name").val();
     var _msg = $("#msg").val();
@@ -39,6 +44,7 @@ $('#submit-btn').click(function () {
     });
 
     add_text(_name, _msg, pos);
+    clear_form();
 });
 
 $("#msg-form").mouseenter(function(){
@@ -50,7 +56,9 @@ $("#msg-form").mouseenter(function(){
 });
 
 function clear_form(){
-
+    $("#msg-form").hide();
+    $("#msg").val("");
+    $("#name").val("");
 }
 
 function add_text(name, msg, position){

@@ -1,4 +1,5 @@
 import json
+import re
 
 def get_data(s):
     data = {}
@@ -14,3 +15,9 @@ def insert_data(data, s):
         feeds = feeds + [data]
         print(feeds)
         json.dump(feeds, f)
+
+def is_secure(s):
+    if re.match(r'^.*(<script|<link).*', s):
+        return False
+    else:
+        return True
