@@ -30,21 +30,19 @@ $('#cancel-btn').click(function () {
 $('#submit-btn').click(function () {
     var _name = $("#name").val();
     var _msg = $("#msg").val();
+    var pathname = window.location.pathname+'/add_msg';
 
     $.ajax({
         type: "POST",
         contentType: "application/json; charset=utf-8",
-        url: "/add_msg",
+        url: pathname,
         data: JSON.stringify({ name: _name, msg: _msg , position: pos}),
         success: function (data) {
-            console.log("Success!");
-            
+            add_text(_name, _msg, pos);
+            clear_form();
         },
         dataType: "json"
     });
-
-    add_text(_name, _msg, pos);
-    clear_form();
 });
 
 $("#msg-form").mouseenter(function(){

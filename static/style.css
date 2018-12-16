@@ -11,3 +11,8 @@
     position: absolute;
     display: none;
 }
+
+.add-new{
+    text-align: center;
+    cursor: pointer;
+}

@@ -1,0 +1,26 @@
+{% extends "bootstrap/base.html" %}
+
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='style.css')}}">
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('.static', filename='main.js')}}"></script>
+{% endblock %}
+
+{% block content %}
+<div class="text-owner">
+        <div id="msg-form">
+            <input class="form-control form-control-lg" type="text" placeholder="Sign your name" id="name">
+            <input class="form-control" type="text" placeholder="Message" id="msg">
+            <button class="btn" id="submit-btn">Submit</button>
+            <button class="btn cancel-btn" id="cancel-btn">Cancel</button>
+        </div>
+        {% for msg in content %}
+            <div style="position:absolute; left:{{msg['position']['x']}}px; top:{{msg['position']['y']}}px;"><div><b>{{msg['name']}}:</b></div><div>{{msg['msg']}}</div></div>
+        {% endfor %}
+    </div>
+{% endblock %}

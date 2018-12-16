@@ -1,38 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
+{% extends "bootstrap/base.html" %}
 
-    <!-- Jquery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='style.css')}}">
+{% endblock %}
 
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    
-    <!-- Style -->
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">SignYourName</a>
-        </nav>
-    </div>
-    <div class="text-owner">
-        <div id="msg-form">
-            <input class="form-control form-control-lg" type="text" placeholder="Sign your name" id="name">
-            <input class="form-control" type="text" placeholder="Message" id="msg">
-            <button class="btn" id="submit-btn">Submit</button>
-            <button class="btn cancel-btn" id="cancel-btn">Cancel</button>
+{% block scripts %}
+{{super()}}
+<script src="{{url_for('.static', filename='index.js')}}"></script>
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+        Bootstrap
+    </a>
+</nav>
+{% endblock %}
+
+{% block content %}
+<h1>Avaiable Boards:</h1>
+<div class="container-fluid">
+        {% for boards in content %}
+        <div class="row">
+            {%for board in boards %}
+                {% if board is not none %}  
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="card" style="width: 18rem;">
+                            <img class="card-img-top" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_167b24fbf60%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_167b24fbf60%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2299.421875%22%20y%3D%2296.2390625%22%3EImage%20cap%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ board.board_name }}</h5>
+                                <p class="card-text">{{ board.board_about }}</p>
+                                <a href="board/{{ board.board_id }}" class="btn btn-primary">Visit</a>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <div class="add-new card" style="width: 18rem;" data-toggle="modal" data-target="#add-new-board">
+                            <b><span class="glyphicon glyphicon-plus" aria-hidden="true" style="font-size: 250px; text-align: center;"></span></b>
+                        </div>
+                    </div>
+                {%endif %}
+            {% endfor %}
         </div>
-        {% for msg in content %}
-            <div style="position:absolute; left:{{msg['position']['x']}}px; top:{{msg['position']['y']}}px;"><div><b>{{msg['name']}}:</b></div><div>{{msg['msg']}}</div></div>
         {% endfor %}
     </div>
-
-    <script src="/static/main.js"></script>
-</body>
-</html>
+      <!-- Modal -->
+    <form>
+    <div class="modal fade" id="add-new-board" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Create a new board</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                            <div class="form-group">
+                              <label for="board_name">Board Name</label>
+                              <input type="text" class="form-control" id="board_name" aria-describedby="emailHelp" placeholder="Enter name of the board">
+                            </div>
+                            <div class="form-group">
+                              <label for="board_about">About</label>
+                              <input type="text" class="form-control" id="board_about" placeholder="About your board">
+                            </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button id="create" type="button" class="btn btn-primary">Create</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+{% endblock %}
