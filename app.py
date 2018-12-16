@@ -45,9 +45,7 @@ def board(id):
     if(board_data == None):
         return redirect("/", code=302)
 
-    data = board_data.board_content
-
-    return render_template("board.html", content=data)
+    return render_template("board.html", content=board_data)
 
 @app.route('/board/<id>/add_msg', methods=['POST'])
 def add_msg(id):
